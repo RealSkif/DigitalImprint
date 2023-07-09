@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <title>Запрос координат</title>
+</head>
+
+<body>
+<main>
+    <h1 class="main__name">Запрос координат</h1>
+    <button class="get-gps" id="01" onclick="getLocation()">Отправить местоположение!</button>
+    <script th:inline="javascript"  th:src="@{/js/location.js}" ></script>
+</main>
+<footer class="footer">
+    <a href="https://mechera.ru/personal_data.html" target="_blank" class="footer__link">Политика персональных
+        данных</a>
+    <a href="https://mechera.ru/politica.html" target="_blank" class="footer__link">Политика конфиденциальности
+        персональных данных</a>
+</footer>
+
+</body>
+
+</html>
