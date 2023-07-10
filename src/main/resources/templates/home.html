@@ -2,6 +2,9 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=7f7b512f-22e5-4fca-a8d7-6ce9f590c679&lang=ru_RU"
+            type="text/javascript">
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
@@ -12,7 +15,14 @@
 <main>
     <h1 class="main__name">Запрос координат</h1>
     <button class="get-gps" id="01" onclick="getLocation()">Отправить местоположение!</button>
-    <script th:inline="javascript"  th:src="@{/js/location.js}" ></script>
+    <script th:inline="javascript" th:src="@{/js/location.js}"></script>
+    <div id="map">
+        <script th:inline="javascript" th:src="@{/js/yandexMap.js}">
+            latitude = [[${location.getLatitude()}]]
+            longitude = [[${location.getLongitude()}]]
+            console.log(latitude, longitude)
+        </script>
+    </div>
 </main>
 <footer class="footer">
     <a href="https://mechera.ru/personal_data.html" target="_blank" class="footer__link">Политика персональных

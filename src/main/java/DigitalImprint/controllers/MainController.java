@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -24,12 +25,10 @@ import java.text.SimpleDateFormat;
 @RequestMapping("/home")
 public class MainController {
     private final JavaMailSender mailSender;
-//    private final LocationData locationData;
 
     @Autowired
     public MainController(JavaMailSender mailSender) {
         this.mailSender = mailSender;
-//        this.locationData = locationData;
     }
 
     @GetMapping
@@ -39,7 +38,8 @@ public class MainController {
 
     @PostMapping
     public String locate(HttpServletRequest request,
-                         @RequestBody LocationData locationData) throws MessagingException {
+                         @RequestBody LocationData locationData,
+                         Model model) throws MessagingException {
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
         locationData.setIpAddress(request.getRemoteAddr());
         locationData.setOs(String.valueOf(userAgent.getOperatingSystem()));
@@ -55,7 +55,9 @@ public class MainController {
         }
         String json = LocationData.locationDataToJson(locationData);
         sendEmailWithJson(json);
-
+        model.addAttribute("location", locationData);
+        System.out.println(locationData.getLatitude());
+        System.out.println(locationData.getLongitude());
         return "home";
     }
 
@@ -91,6 +93,7 @@ public class MainController {
 
         return null;
     }
+
     private void sendEmailWithJson(String json) throws jakarta.mail.MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
