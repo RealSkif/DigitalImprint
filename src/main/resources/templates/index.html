@@ -16,13 +16,6 @@
     <h1 class="main__name">Запрос координат</h1>
     <button class="get-gps" id="01" onclick="getLocation()">Отправить местоположение!</button>
     <script th:inline="javascript" th:src="@{/js/location.js}"></script>
-    <div id="map">
-        <script th:inline="javascript" th:src="@{/js/yandexMap.js}">
-            latitude = [[${location.getLatitude()}]]
-            longitude = [[${location.getLongitude()}]]
-            console.log(latitude, longitude)
-        </script>
-    </div>
 </main>
 <footer class="footer">
     <a href="https://mechera.ru/personal_data.html" target="_blank" class="footer__link">Политика персональных
